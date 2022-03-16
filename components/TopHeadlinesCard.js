@@ -33,7 +33,7 @@ export default function TextCard({ websiteTitle, websiteImage, countryCode }) {
   return (
     <Center py={6}>
       <Box
-        maxW={"445px"}
+        maxW={"540px"}
         w={"full"}
         boxShadow={"2xl"}
         rounded={"md"}
