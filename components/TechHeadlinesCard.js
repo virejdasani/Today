@@ -13,11 +13,15 @@ import Headline from "./Headline";
 import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function TopHeadlinesCard({ websiteTitle, countryCode }) {
+export default function TextCard({ websiteTitle, websiteImage, countryCode }) {
   // Thanks to https://github.com/SauravKanchan/NewsAPI
   const baseUrl = "https://saurav.tech/NewsAPI/";
   const topHeadlinesUrl =
-    baseUrl + "/top-headlines/category/" + "general/" + countryCode + ".json";
+    baseUrl +
+    "/top-headlines/category/" +
+    "technology/" +
+    countryCode +
+    ".json";
 
   const { data, error } = useSWR(topHeadlinesUrl, fetcher);
 

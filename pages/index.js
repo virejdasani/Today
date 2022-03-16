@@ -1,5 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { Text, useColorModeValue } from "@chakra-ui/react";
+import { Text, useColorModeValue, Stack } from "@chakra-ui/react";
 import Head from "next/head";
 
 import useSWR from "swr";
@@ -7,6 +6,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 import Navbar from "../components/Navbar";
 import TopHeadlinesCard from "../components/TopHeadlinesCard";
+import TechHeadlinesCard from "../components/TechHeadlinesCard";
 
 export default function Home() {
   const { data, error } = useSWR("http://ip-api.com/json/", fetcher);
@@ -28,14 +28,27 @@ export default function Home() {
         fontSize="6xl"
         className="text-center"
         color={useColorModeValue("blue.400", "blue.200")}
+        mb={4}
       >
         Today
       </Text>
-      <TopHeadlinesCard
-        websiteTitle="Latest Headlines"
-        websiteImage="https://avatars0.githubusercontent.com/u/1164541?v=4"
-        countryCode={!data ? "in" : data.countryCode.toLowerCase()}
-      />
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        spacing="20px"
+        justifyContent="center"
+        marginLeft={8}
+        marginRight={8}
+        marginBottom={8}
+      >
+        <TopHeadlinesCard
+          websiteTitle="Top Headlines"
+          countryCode={!data ? "in" : data.countryCode.toLowerCase()}
+        />
+        <TechHeadlinesCard
+          websiteTitle="Tech News"
+          countryCode={!data ? "in" : data.countryCode.toLowerCase()}
+        />
+      </Stack>
     </div>
   );
 }
