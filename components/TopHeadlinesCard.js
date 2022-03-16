@@ -14,18 +14,21 @@ import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function TextCard({ websiteTitle, websiteImage, countryCode }) {
+  // Thanks to https://github.com/SauravKanchan/NewsAPI
   const baseUrl = "https://saurav.tech/NewsAPI/";
   const topHeadlinesUrl =
     baseUrl + "/top-headlines/category/" + "general/" + countryCode + ".json";
 
   const { data, error } = useSWR(topHeadlinesUrl, fetcher);
-  console.log(data);
 
-  const articles = data.articles;
+  if (data) {
+    console.log(data);
+    const articles = data.articles;
 
-  articles.map((article) => {
-    console.log(article.source.name);
-  });
+    articles.map((article) => {
+      console.log(article.source.name);
+    });
+  }
 
   return (
     <Center py={6}>
@@ -57,19 +60,25 @@ export default function TextCard({ websiteTitle, websiteImage, countryCode }) {
               {websiteTitle}
               {/* Todays News */}
             </Heading>
-            <Avatar src={websiteImage} alt={"Author"} />
+            {/* <Avatar src={websiteImage} alt={"Author"} /> */}
           </Stack>
-          <Headline
-            date="Mar 15 2022, 8:30 AM"
-            // headline="Today, this will be a headline from a news api, hopefully atleast. Random words eh?"
-            headline="headline"
-            author="John"
-          />
-          <Headline
-            date="Mar 15 2022, 7:09 AM"
-            headline="Another random ass headline Random words eh?"
-            author="John"
-          />
+
+          {!data
+            ? "loading"
+            : data.articles.map((article, index) => {
+                if (index < 5) {
+                  return (
+                    <Headline
+                      headline={article.title}
+                      headlineWebsite={article.url}
+                      date={article.publishedAt}
+                      author={article.source.name}
+                      image={article.urlToImage}
+                      key={index}
+                    />
+                  );
+                }
+              })}
         </Stack>
       </Box>
     </Center>

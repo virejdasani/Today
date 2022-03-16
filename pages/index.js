@@ -5,7 +5,7 @@ import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 import Navbar from "../components/Navbar";
-import TextCard from "../components/TextCard";
+import TopHeadlinesCard from "../components/TopHeadlinesCard";
 
 export default function Home() {
   const { data, error } = useSWR("http://ip-api.com/json/", fetcher);
@@ -21,8 +21,8 @@ export default function Home() {
       >
         Today
       </Text>
-      <TextCard
-        websiteTitle="World News"
+      <TopHeadlinesCard
+        websiteTitle="Latest Headlines"
         websiteImage="https://avatars0.githubusercontent.com/u/1164541?v=4"
         countryCode={!data ? "Loading..." : data.countryCode.toLowerCase()}
       />
