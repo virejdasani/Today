@@ -1,10 +1,15 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { Text, useColorModeValue } from "@chakra-ui/react";
 
+import useSWR from "swr";
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 import Navbar from "../components/Navbar";
 import TextCard from "../components/TextCard";
 
 export default function Home() {
+  const { data, error } = useSWR("http://ip-api.com/json/", fetcher);
+
   return (
     // <div className="w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
     <div>
@@ -19,6 +24,7 @@ export default function Home() {
       <TextCard
         websiteTitle="World News"
         websiteImage="https://avatars0.githubusercontent.com/u/1164541?v=4"
+        countryCode={!data ? "Loading..." : data.countryCode.toLowerCase()}
       />
     </div>
   );

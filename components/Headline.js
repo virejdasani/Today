@@ -10,9 +10,9 @@ import {
   Link,
 } from "@chakra-ui/react";
 
-export default function blogPostWithImage({ headline, headlineWebsite, date }) {
+export default function Headline({ headline, headlineWebsite, date, author }) {
   return (
-    <>
+    <div>
       <Link fontWeight={600} fontSize={"lg"} href={headlineWebsite} isExternal>
         {headline}
       </Link>
@@ -26,10 +26,10 @@ export default function blogPostWithImage({ headline, headlineWebsite, date }) {
         pb="4"
       >
         <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-          {/* <Text fontWeight={600}>John Doe</Text> */}
+          <Text fontWeight={600}>{author}</Text>
           <Text color={"gray.500"}>{date}</Text>
         </Stack>
       </Stack>
-    </>
+    </div>
   );
 }
