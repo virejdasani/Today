@@ -24,7 +24,7 @@ export default function Home() {
       <TopHeadlinesCard
         websiteTitle="Latest Headlines"
         websiteImage="https://avatars0.githubusercontent.com/u/1164541?v=4"
-        countryCode={!data ? "Loading..." : data.countryCode.toLowerCase()}
+        countryCode={!data ? "in" : data.countryCode.toLowerCase()}
       />
     </div>
   );
