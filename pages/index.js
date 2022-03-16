@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { Text, useColorModeValue } from "@chakra-ui/react";
+import Head from "next/head";
 
 import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -13,10 +14,14 @@ export default function Home() {
   return (
     // <div className="w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
     <div>
+      {/*  This meta tag is required to allow browsers to fetch the IP because the api uses HTTP */}
       <meta
         httpEquiv="Content-Security-Policy"
         content="upgrade-insecure-requests"
       />
+      <Head>
+        <title>Today</title>
+      </Head>
 
       <Navbar />
       <Text
