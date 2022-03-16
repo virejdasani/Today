@@ -21,14 +21,15 @@ export default function TextCard({ websiteTitle, websiteImage, countryCode }) {
 
   const { data, error } = useSWR(topHeadlinesUrl, fetcher);
 
-  if (data) {
-    console.log(data);
-    const articles = data.articles;
+  // For debugging:
+  // if (data) {
+  //   console.log(data);
+  //   const articles = data.articles;
 
-    articles.map((article) => {
-      console.log(article.source.name);
-    });
-  }
+  //   articles.map((article) => {
+  //     console.log(article.source.name);
+  //   });
+  // }
 
   return (
     <Center py={6}>
