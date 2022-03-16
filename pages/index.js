@@ -13,6 +13,11 @@ export default function Home() {
   return (
     // <div className="w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
     <div>
+      <meta
+        httpEquiv="Content-Security-Policy"
+        content="upgrade-insecure-requests"
+      />
+
       <Navbar />
       <Text
         fontSize="6xl"
