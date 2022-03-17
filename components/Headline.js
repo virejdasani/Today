@@ -24,7 +24,7 @@ export default function Headline({
     <Stack
       mt={2}
       mb={5}
-      direction={"row"}
+      direction={{ base: "column-reverse", md: "row" }}
       spacing={4}
       align={"center"}
       justify={"space-between"}
@@ -52,7 +52,14 @@ export default function Headline({
           </Stack>
         </Stack>
       </div>
-      <Image src={image} alt="" boxSize="100px" objectFit="cover" />
+      <Image
+        src={image}
+        alt=""
+        // boxSize={{ base: "200px", md: "100px" }}
+        height={{ base: "200px", md: "100px", lg: "150px" }}
+        width={{ base: "", md: "100px", lg: "170px" }}
+        objectFit="cover"
+      />
     </Stack>
   );
 }
