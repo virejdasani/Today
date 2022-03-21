@@ -4,14 +4,25 @@ import {
   Heading,
   Text,
   Stack,
+  HStack,
+  VStack,
   Avatar,
   useColorModeValue,
 } from "@chakra-ui/react";
 
 import Headline from "./Headline";
 
+import SliderTest from "./sliderTest";
+
 import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function TopHeadlinesCard({ websiteTitle, countryCode }) {
   // Thanks to https://github.com/SauravKanchan/NewsAPI
@@ -39,6 +50,8 @@ export default function TopHeadlinesCard({ websiteTitle, countryCode }) {
       rounded={"md"}
       p={6}
       overflow={"hidden"}
+      borderColor={useColorModeValue("gray.200", "gray.700")}
+      borderWidth={1}
     >
       <Stack>
         <Stack
@@ -63,22 +76,26 @@ export default function TopHeadlinesCard({ websiteTitle, countryCode }) {
           {/* <Avatar src={websiteImage} alt={"Author"} /> */}
         </Stack>
 
-        {!data
-          ? "loading"
-          : data.articles.map((article, index) => {
-              if (index < 5) {
-                return (
-                  <Headline
-                    headline={article.title}
-                    headlineWebsite={article.url}
-                    date={article.publishedAt}
-                    author={article.source.name}
-                    image={article.urlToImage}
-                    key={index}
-                  />
-                );
-              }
-            })}
+        <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+          {!data
+            ? "loading"
+            : data.articles.map((article, index) => {
+                if (index < 16) {
+                  return (
+                    <SwiperSlide>
+                      <Headline
+                        headline={article.title}
+                        headlineWebsite={article.url}
+                        date={article.publishedAt}
+                        author={article.source.name}
+                        image={article.urlToImage}
+                        key={index}
+                      />
+                    </SwiperSlide>
+                  );
+                }
+              })}
+        </Swiper>
       </Stack>
     </Box>
   );

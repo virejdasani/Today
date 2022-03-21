@@ -8,6 +8,8 @@ import Navbar from "../components/Navbar";
 import TopHeadlinesCard from "../components/TopHeadlinesCard";
 import TechHeadlinesCard from "../components/TechHeadlinesCard";
 
+import SliderTest from "../components/sliderTest";
+
 export default function Home() {
   const { data, error } = useSWR("http://ip-api.com/json/", fetcher);
 

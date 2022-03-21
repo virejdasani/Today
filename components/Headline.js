@@ -18,19 +18,26 @@ export default function Headline({
   image,
 }) {
   const formattedDate = new Date(date).toLocaleDateString();
-  const formattedTime = new Date(date).toLocaleTimeString().slice(0, 5);
+  const formattedTime = new Date(date)
+    .toLocaleTimeString("en-GB", {
+      hour12: false,
+    })
+    .slice(0, 5);
 
   return (
     <Stack
       mt={2}
-      mb={5}
-      direction={{ base: "column-reverse", md: "row" }}
+      // mb={5}
+      direction={{ base: "column-reverse", md: "column-reverse" }}
+      // direction={{ base: "column-reverse", md: "row" }}
       spacing={4}
       align={"center"}
       justify={"space-between"}
-      pb={4}
-      borderBottom="2px"
-      borderColor={useColorModeValue("gray.500", "gray.600")}
+      // pb={4}
+      // borderBottom="2px"
+      // borderColor={useColorModeValue("gray.500", "gray.600")}
+      paddingRight={14}
+      paddingLeft={14}
     >
       <div>
         <Link
@@ -55,9 +62,10 @@ export default function Headline({
       <Image
         src={image}
         alt=""
-        // boxSize={{ base: "200px", md: "100px" }}
-        height={{ base: "200px", md: "100px", lg: "150px" }}
-        width={{ base: "", md: "100px", lg: "170px" }}
+        // height={{ base: "200px", md: "100px", lg: "150px" }}
+        // width={{ base: "", md: "100px", lg: "170px" }}
+        height={{ base: "150px", md: "150px", lg: "150px" }}
+        width={{ base: "300px", md: "270px", lg: "350px" }}
         objectFit="cover"
       />
     </Stack>

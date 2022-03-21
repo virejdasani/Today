@@ -10,6 +10,13 @@ import {
 
 import Headline from "./Headline";
 
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+
 import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -43,6 +50,8 @@ export default function TextCard({ websiteTitle, websiteImage, countryCode }) {
       rounded={"md"}
       p={6}
       overflow={"hidden"}
+      borderColor={useColorModeValue("gray.200", "gray.700")}
+      borderWidth={1}
     >
       <Stack>
         <Stack
@@ -64,25 +73,28 @@ export default function TextCard({ websiteTitle, websiteImage, countryCode }) {
             {websiteTitle}
             {/* Todays News */}
           </Heading>
-          {/* <Avatar src={websiteImage} alt={"Author"} /> */}
         </Stack>
 
-        {!data
-          ? "loading"
-          : data.articles.map((article, index) => {
-              if (index < 5) {
-                return (
-                  <Headline
-                    headline={article.title}
-                    headlineWebsite={article.url}
-                    date={article.publishedAt}
-                    author={article.source.name}
-                    image={article.urlToImage}
-                    key={index}
-                  />
-                );
-              }
-            })}
+        <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+          {!data
+            ? "loading"
+            : data.articles.map((article, index) => {
+                if (index < 16) {
+                  return (
+                    <SwiperSlide>
+                      <Headline
+                        headline={article.title}
+                        headlineWebsite={article.url}
+                        date={article.publishedAt}
+                        author={article.source.name}
+                        image={article.urlToImage}
+                        key={index}
+                      />
+                    </SwiperSlide>
+                  );
+                }
+              })}
+        </Swiper>
       </Stack>
     </Box>
   );
